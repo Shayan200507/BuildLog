@@ -1,14 +1,18 @@
 import express from "express"
 import session from "express-session";
 import dotenv from "dotenv"
+import type  { Express} from "express"
+import {AuthHhandler } from "./Routers/AuthRouter.js"
 
-const server = express()
-const PORT = 8000
+
+
+const server: Express = express()
+const PORT:number = 8000
 
 dotenv.config()
 
-app.use(express.json())
-app.use(session({
+server.use(express.json())
+server.use(session({
     secret: process.env.SPIRAL_SESSION_SECRET|| 'dev-secret' ,
     resave: false,
     saveUninitialized: false,
@@ -20,6 +24,22 @@ app.use(session({
     }
 
 }))
+
+
+//Auth Route
+server.use("/api/auth",AuthHhandler)
+
+
+//error handling
+server.use((req,res)=>{
+
+  res.status(404).json({
+
+     error: "request not found"
+
+  })
+
+})
 
 
 
