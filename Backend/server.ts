@@ -44,6 +44,8 @@ server.use((req,res)=>{
 
 
 
-server.listen(PORT,()=>{console.log(`connected to port: ${PORT}` )})
+server.listen(PORT,()=>{console.log(`connected to port: ${PORT}` )}).on('error', (err) => {
+  console.error('Failed to start server:', err)
+}) 
 
 
