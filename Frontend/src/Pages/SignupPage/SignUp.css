@@ -7,14 +7,22 @@ min-height: 100vh;
   width: 100%;
   background: linear-gradient(135deg, #1e1b4b, #3730a3, #4c1d95);
   font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+
+
+
 }
 
 .SignUpHeader{
  
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(20, 18, 60, 0.55);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
  
  
  
@@ -42,3 +50,37 @@ min-height: 100vh;
   width: 50px;
   height: 50px;
 }
+
+
+.FormWrapper{
+
+    background: rgba(20, 18, 60, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+
+  position: relative;
+  top: clamp(50px,5vh,100px);
+  border-radius: 10px;
+
+
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  font-size: 12px;
+ 
+}
+
+form{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  gap: clamp(15px,2vh,20px);
+}
+
