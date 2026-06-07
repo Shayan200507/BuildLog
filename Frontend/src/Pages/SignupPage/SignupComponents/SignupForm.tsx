@@ -2,13 +2,69 @@
 
 import type React from "react"
 
+type Data = {
+
+   dob: Date
+   email: string
+   password: string
+   username: string
+}
+
 
 
 export function SignupForm():React.JSX.Element{
 
 
-    function handleSubmit(data: FormData){
-         console.log(data)
+   async function  handleSubmit(data: FormData){
+          const obj: Data = {
+
+             dob: new Date(data.get("dob") as string),
+             email: data.get("email") as string,
+            password: data.get("password") as string,
+            username: data.get("username") as string
+
+          }
+
+
+          console.log(obj)
+
+
+
+          const res:Response  =  await fetch("http://localhost:8000/api/auth/register",{
+
+            method:"POST",
+            headers: {
+              'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(obj)  
+
+          })
+
+        const resObj = await res.json()
+          if(res.ok){
+            
+            console.log(resObj)
+          }
+          else{
+              console.log(resObj)
+          }
+
+
+          
+
+        
+
+
+
+
+
+
+      
+
+
+          
+         
+
         
     }
 
@@ -38,13 +94,14 @@ export function SignupForm():React.JSX.Element{
 
         <label htmlFor="email">Username:</label>
 
-        <input type="text" name="username" placeholder="Username" required />
+        <input type="text" name="username" placeholder="Username"  pattern="^[a-zA-Z0-9_\-]{1,20}$" 
+        title="Username must be 1–20 characters and can only include letters, numbers, underscores (_), or hyphens (-)."  required />
 
 
 
         <label htmlFor="password">Password:</label>
 
-        <input type="password" name="password" placeholder="password" required />
+        <input type="password" name="password" placeholder="password" pattern="^\S+$" title="no spaces allowed"  required />
 
 
     

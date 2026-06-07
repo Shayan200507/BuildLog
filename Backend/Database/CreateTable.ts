@@ -10,6 +10,7 @@ await pool.query(`
     email TEXT UNIQUE NOT NULL,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
+    dob DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     

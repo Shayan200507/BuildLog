@@ -2,7 +2,8 @@ import express from "express"
 import session from "express-session";
 import dotenv from "dotenv"
 import type  { Express} from "express"
-import {AuthHhandler } from "./Routers/AuthRouter.js"
+import {AuthHandler } from "./Routers/AuthRouter.ts"
+import cors from "cors";
 
 
 
@@ -10,7 +11,7 @@ const server: Express = express()
 const PORT:number = 8000
 
 dotenv.config()
-
+server.use(cors())
 server.use(express.json())
 server.use(session({
     secret: process.env.SPIRAL_SESSION_SECRET|| 'dev-secret' ,
@@ -27,7 +28,7 @@ server.use(session({
 
 
 //Auth Route
-server.use("/api/auth",AuthHhandler)
+server.use("/api/auth",AuthHandler)
 
 
 //error handling
