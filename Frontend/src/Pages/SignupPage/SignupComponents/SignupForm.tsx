@@ -5,7 +5,19 @@ import type React from "react"
 
 
 export function SignupForm():React.JSX.Element{
-return(
+
+
+    function handleSubmit(data: FormData){
+         console.log(data)
+        
+    }
+
+
+
+
+
+
+    return(
 
 <>
 
@@ -13,7 +25,13 @@ return(
 
     <h1>Signup Today!</h1>
 
-    <form>
+    <form action={handleSubmit}>
+
+
+        <label htmlFor="dob">Date of birth:</label>
+        <input id="dob" type="date" name="dob" className="dob" required/>
+
+
         <label htmlFor="email">Email address:</label>
         <input type="email" name="email" className= "emailBox" placeholder="...@email.com" required />
 
@@ -28,6 +46,8 @@ return(
 
         <input type="password" name="password" placeholder="password" required />
 
+
+    
 
 
          <button type="submit">Submit</button>

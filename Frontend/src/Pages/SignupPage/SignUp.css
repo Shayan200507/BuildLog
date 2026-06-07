@@ -17,6 +17,13 @@ min-height: 100vh;
 
 }
 
+.Logo_title{
+
+    display: flex;
+
+
+}
+
 .SignUpHeader{
  
   background: rgba(20, 18, 60, 0.55);
@@ -32,7 +39,7 @@ min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 
 
 
@@ -59,13 +66,11 @@ min-height: 100vh;
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
-
-  position: relative;
-  top: clamp(50px,5vh,100px);
+ margin-top: clamp(30px, 4vh, 70px);
   border-radius: 10px;
 
 
-  padding: 20px;
+  padding: 12px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,8 +80,12 @@ min-height: 100vh;
  
 }
 
-form{
-  padding: 20px;
+
+
+
+
+.FormWrapper form{
+  padding: 30px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,3 +93,82 @@ form{
   gap: clamp(15px,2vh,20px);
 }
 
+
+.FormWrapper button{
+    
+
+  background-color: orangered;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  padding: 5px;
+  width: 50%;
+  margin-top: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+button:hover{
+  background-color: rgb(126, 34, 0);
+  cursor: pointer;
+
+}
+button:active {
+  transform: scale(0.96);
+}
+
+.dob{
+  width: 170px;
+}
+
+
+.loginContainer{
+
+display: flex;
+margin-right: 10px;
+
+
+}
+
+
+.loginContainer form {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+}
+
+
+
+.loginContainer input{
+
+  max-width: 100px;
+
+  border: none;
+
+ 
+
+
+}
+
+.loginContainer button{
+
+background: orangered;
+border: none;
+height: 20px;
+
+
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid #000000;
+}
