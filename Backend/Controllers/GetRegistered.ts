@@ -1,14 +1,94 @@
 
 import {json, type Request,type Response} from "express"
+import validator from "validator"
+import bcrypt from "bcrypt"
+
+
+type Data = {
+
+   dob: Date
+   email: string
+   password: string
+   username: string
+}
+
+const usernameRegex = /^[a-zA-Z0-9_\-]{1,20}$/
+const passwordRegex = /^\S+$/
 
 export function getRegistered(req:Request,res:Response){
 
        console.log("in the backend")
     try{
 
-        const data = req.body
+        const data:Data = req.body
+
+        data.password = data.password.trim()
+        data.email = data.email.trim()
+        data.username = data.username.trim()
+
+       const keys:(keyof Data)[] = Object.keys(data) as (keyof Data)[]
+
+        for (let key of keys ){
+            if(data[key] == ""){ res.status(400).json({message: "please fill in all fields"})}
+
+            
+            
+            if (key == "username"){
+                if (!usernameRegex.test(data[key])){
+                    res.status(400).json({message: "Username must be 1–20 characters and can only include letters, numbers, underscores (_), or hyphens (-)."});return
+
+                }
+            }
+
+            
+            
+            
+            if (key == "password"){
+                if(!passwordRegex.test(data[key])){ 
+
+                    res.status(400).json({message: "no spaces allowed in the password"});return
+
+                }
+            }
+
+
+             
+
+            if(key == "email"){
+
+                 if(!validator.isEmail(data[key])){ res.status(400).json({
+                 error: 'Invalid email'
+                });return
+
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         res.json({message: `data recieved`})
-        console.log(data)
+        
 
 
 
