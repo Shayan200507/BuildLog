@@ -19,7 +19,7 @@ First_Name: string
 const usernameRegex = /^[a-zA-Z0-9_\-]{1,20}$/
 const passwordRegex = /^\S{8,}$/
 
-export function getRegistered(req:Request,res:Response){
+export async function getRegistered(req:Request,res:Response){
 
        console.log("in the backend")
     try{
@@ -29,6 +29,8 @@ export function getRegistered(req:Request,res:Response){
         data.password = data.password.trim()
         data.email = data.email.trim()
         data.username = data.username.trim()
+        data.First_Name = data.First_Name.trim()
+        data.Last_Name = data.Last_Name.trim()
 
        const keys:(keyof Data)[] = Object.keys(data) as (keyof Data)[]
 
@@ -74,30 +76,13 @@ export function getRegistered(req:Request,res:Response){
 
 
 
+      await writeData(req,data)
 
 
 
-
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         res.json({message: `data recieved`})
         
-
-
-
-
-
 
     }
     catch(error){
@@ -114,14 +99,42 @@ export function getRegistered(req:Request,res:Response){
 
 
 
-
- async function writeData(userData:Data){
-
+ async function writeData(req: Request,userData:Data){
 
 
 
 
+    try{
+  const hashedPass =await  bcrypt.hash(userData.password,10)
+    
+  
+  
+     const insertData = await pool.query(`
+        
+        INSERT INTO users (first_name,last_name,email,username,password,dob)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id
 
+        `,[userData.First_Name,userData.Last_Name,userData.email,userData.username,hashedPass,userData.dob])
+
+
+        //console.log("insertData:")
+        //console.log(insertData)
+        req.session.userID = insertData.rows[0].id
+        console.log(req.session.userID)
+
+        
+
+
+     }
+
+
+     catch(error){
+        console.log(error)
+     }
+     finally{
+        await pool.end()
+     }
 
 
 
