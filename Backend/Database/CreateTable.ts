@@ -1,4 +1,4 @@
-import { pool } from "./Connection.js";
+import { pool } from "./Connection.ts";
 
 try{
 await pool.query(`
@@ -6,7 +6,8 @@ await pool.query(`
     CREATE TABLE IF NOT EXISTS users(
      
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name TEXT,
+    first_name TEXT NOT NULL,
+    last_name  TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,

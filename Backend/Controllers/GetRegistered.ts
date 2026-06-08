@@ -2,6 +2,7 @@
 import {json, type Request,type Response} from "express"
 import validator from "validator"
 import bcrypt from "bcrypt"
+import { pool} from "../Database/Connection.ts"
 
 
 type Data = {
@@ -10,10 +11,13 @@ type Data = {
    email: string
    password: string
    username: string
+First_Name: string
+   Last_Name: string
+
 }
 
 const usernameRegex = /^[a-zA-Z0-9_\-]{1,20}$/
-const passwordRegex = /^\S+$/
+const passwordRegex = /^\S{8,}$/
 
 export function getRegistered(req:Request,res:Response){
 
@@ -46,7 +50,7 @@ export function getRegistered(req:Request,res:Response){
             if (key == "password"){
                 if(!passwordRegex.test(data[key])){ 
 
-                    res.status(400).json({message: "no spaces allowed in the password"});return
+                    res.status(400).json({message: "no spaces allowed in the password and length must be 8 characters"});return
 
                 }
             }
@@ -107,3 +111,23 @@ export function getRegistered(req:Request,res:Response){
     console.log("registering")
 
 }
+
+
+
+
+ async function writeData(userData:Data){
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+

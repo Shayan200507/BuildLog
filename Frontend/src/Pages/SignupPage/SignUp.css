@@ -85,7 +85,7 @@ min-height: 100vh;
 
 
 .FormWrapper form{
-  padding: 30px 30px;
+  padding: 40px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
