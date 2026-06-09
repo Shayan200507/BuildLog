@@ -2,6 +2,7 @@
 
 import './App.css'
 import {SingupPage} from "./Pages/SignupPage/SignupPage"
+import {HomePage} from "./Pages/HomePage/HomePage"
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
      
 
 
-   <SingupPage/>
+    <HomePage />
 
 
 

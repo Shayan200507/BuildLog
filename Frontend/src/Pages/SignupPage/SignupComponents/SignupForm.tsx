@@ -83,7 +83,7 @@ export function SignupForm():React.JSX.Element{
             console.log(resObj)
           }
           else{
-              console.log(resObj)
+              setWarning(resObj.message)
           }
 
         }
