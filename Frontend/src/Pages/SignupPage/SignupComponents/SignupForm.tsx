@@ -1,6 +1,7 @@
 
 import {useState} from "react"
 import type React from "react"
+import { useNavigate } from "react-router"
 
 type Data = {
 
@@ -30,7 +31,7 @@ type FormType = {
 
 export function SignupForm():React.JSX.Element{
 
-
+    const Navigate = useNavigate()
     const [warning,setWarning] = useState<string>("")
     const [formData,setformData] = useState<FormType>({
 
@@ -81,6 +82,7 @@ export function SignupForm():React.JSX.Element{
           if(res.ok){
             
             console.log(resObj)
+            Navigate("/")
           }
           else{
               setWarning(resObj.message)

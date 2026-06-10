@@ -3,6 +3,7 @@
 import './App.css'
 import {SingupPage} from "./Pages/SignupPage/SignupPage"
 import {HomePage} from "./Pages/HomePage/HomePage"
+import { BrowserRouter, Routes, Route } from "react-router";
 
 function App() {
 
@@ -12,7 +13,13 @@ function App() {
      
 
 
-    <HomePage />
+    <BrowserRouter>
+    <Routes>
+       <Route path = "/" element={<HomePage />} />
+       <Route path = "/signup" element={<SingupPage />} />
+
+    </Routes> 
+    </BrowserRouter>
 
 
 
