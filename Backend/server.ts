@@ -11,7 +11,10 @@ const server: Express = express()
 const PORT:number = 8000
 
 dotenv.config()
-server.use(cors())
+server.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
 server.use(express.json())
 server.use(session({
     secret: process.env.SPIRAL_SESSION_SECRET|| 'dev-secret' ,

@@ -1,11 +1,11 @@
 import type React from "react"
 import logo from "../../../assets/devblog-logo-transparent.png"
-import { useState } from "react"
+import {HomePageLogout} from "./HomePageLogout"
 
 
 
 export function HomePageHeader(): React.JSX.Element{
-const [greeting,SetGreeting] = useState<string>("Welcome Guest")
+
 
 return(
 <header className="HomeHeader">
@@ -15,11 +15,9 @@ return(
 <h1>DEVBLOG</h1>
 </div>  
 
-<div className="loggedinContainer">
+<HomePageLogout />
 
-<h1></h1>
 
-</div>
 
 
     

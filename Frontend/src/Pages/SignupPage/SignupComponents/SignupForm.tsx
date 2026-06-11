@@ -69,8 +69,9 @@ export function SignupForm():React.JSX.Element{
 
 
           const res:Response  =  await fetch("http://localhost:8000/api/auth/register",{
-
+            
             method:"POST",
+            credentials: "include",
             headers: {
               'Content-Type': 'application/json'
               },

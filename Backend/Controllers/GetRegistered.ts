@@ -21,7 +21,7 @@ const passwordRegex = /^\S{8,}$/
 
 export async function getRegistered(req:Request,res:Response){
 
-       console.log("in the backend")
+     
     try{
 
         const data:Data = req.body
@@ -93,7 +93,7 @@ export async function getRegistered(req:Request,res:Response){
     }
 
 
-    console.log("registering")
+   
 
 }
 
@@ -121,7 +121,7 @@ export async function getRegistered(req:Request,res:Response){
         //console.log("insertData:")
         //console.log(insertData)
         req.session.userID = insertData.rows[0].id
-        console.log(req.session.userID)
+        //console.log(req.session.userID)
 
         
 
@@ -132,13 +132,7 @@ export async function getRegistered(req:Request,res:Response){
      catch(error){
         console.log(error)
      }
-     finally{
-        await pool.end()
-     }
-
-
-
-
+   
 
 }
 
