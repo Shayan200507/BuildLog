@@ -76,7 +76,7 @@ export async function getRegistered(req:Request,res:Response){
 
 
 
-      await writeData(req,data)
+      await writeData(res,req,data)
 
 
 
@@ -99,16 +99,41 @@ export async function getRegistered(req:Request,res:Response){
 
 
 
- async function writeData(req: Request,userData:Data){
+ async function writeData(res: Response,req: Request,userData:Data){
 
 
 
 
     try{
-  const hashedPass =await  bcrypt.hash(userData.password,10)
-    
   
   
+        const exisitingRecords =  await pool.query(`
+            
+            Select * FROM users WHERE 
+            username  = $1
+            OR
+            email = $2
+            
+            
+            
+            `,[userData.username,userData.email])
+
+
+            if ((exisitingRecords.rowCount ?? 0) > 0){
+                throw  "Email or Username already exists"
+            }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+        const hashedPass =await  bcrypt.hash(userData.password,10)
+
      const insertData = await pool.query(`
         
         INSERT INTO users (first_name,last_name,email,username,password,dob)
@@ -130,7 +155,8 @@ export async function getRegistered(req:Request,res:Response){
 
 
      catch(error){
-        console.log(error)
+        res.status(409).json({message: `${error}`})
+
      }
    
 

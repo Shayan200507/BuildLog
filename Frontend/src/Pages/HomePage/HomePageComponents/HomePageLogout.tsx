@@ -10,7 +10,9 @@ export function HomePageLogout(){
 
 
     async function logout(){
-          const res:Response = await fetch("http://localhost:8000/api/auth/logout")
+          const res:Response = await fetch("http://localhost:8000/api/auth/logout", {
+            credentials: "include"
+          })
           
 
           if(res.ok){

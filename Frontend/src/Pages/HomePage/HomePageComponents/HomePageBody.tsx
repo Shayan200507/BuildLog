@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type React from "react";
 import { useEffect } from "react";
-import { data } from "react-router";
+
 
 
 type responseType = {
@@ -21,7 +21,7 @@ type responseType = {
 export function HomePageBody():React.JSX.Element{
     const [userDetails,setUserDetails] = useState<responseType>()
     const [greeting,SetGreeting] = useState<string>("Guest")
-    const outString:string = `Welcome ${greeting}!`
+    
 
    
 
@@ -31,18 +31,21 @@ export function HomePageBody():React.JSX.Element{
          credentials: "include",
         }).then((res:Response) => {
 
-             if(res.ok){ return res.json()}
+             if(res.ok){console.log("thinks lloggedin"); return res.json()}
              else{ throw new Error("Not logged in");}
 
 
 
         }).then((data:responseType) => {setUserDetails(data);SetGreeting(data.first_name)})
-        .catch((error) => {console.log(error)})
+        .catch((error) => {SetGreeting("Guest");console.log(error)})
 
         
 
 
     },[])
+
+
+    const outString:string = `Welcome ${greeting}!`
 
 
 

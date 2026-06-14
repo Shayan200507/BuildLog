@@ -4,6 +4,10 @@ import { getRegistered } from "../Controllers/GetRegistered.ts"
 import {LoggedInCheck} from "../Middleware/LoggedInCheck.ts"
 import {getMe} from "../Controllers/GetMe.ts"
 import {getLogout} from "../Controllers/GetLogout.ts"
+import {getLogin} from "../Controllers/GetLogin.ts"
+
+
+
 
 export const AuthHandler: Router = express.Router()
 
@@ -11,5 +15,6 @@ export const AuthHandler: Router = express.Router()
 AuthHandler.post("/register",getRegistered)
 AuthHandler.get("/me",LoggedInCheck,getMe)
 AuthHandler.get("/logout",getLogout)
+AuthHandler.post("/login",getLogin)
 
 AuthHandler.use((req,res)=>{res.status(404).json({message: "Endpoint not found"})})
