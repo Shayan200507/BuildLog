@@ -20,12 +20,12 @@
 
 }
 
-.logout-container{
+.logout-container, .Signup-container{
   
    padding-right: 24px;
 }
 
-.logout-container button{
+.logout-container button, .Signup-container button{
     background: orangered;
     color: white;
     border: none;
@@ -35,11 +35,11 @@
 }
 
 
-.logout-container button:hover{
+.logout-container button:hover, .Signup-container button:hover{
     background: rgb(150, 0, 0); 
 }
 
-.logout-container button:active{
+.logout-container button:active, .Signup-container button:active{
     transform: scale(0.96);
 }
 
