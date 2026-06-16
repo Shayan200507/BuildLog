@@ -1,21 +1,7 @@
 
 import type React from "react";
+import type {responseType} from "../../Universal_Types/responseType"
 
-
-
-
-
-type responseType = {
-
-    first_name: string,
-    last_name: string,
-    email: string,
-    username: string
-
-
-
-
-}
 
 
 

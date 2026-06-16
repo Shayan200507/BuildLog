@@ -1,26 +1,13 @@
 
 import type React from "react";
 
-import {HomePageHeader} from "./HomePageComponents/HomePageHeader"
+import {NavBar} from "../Universal_Containers/NavBar"
 import {HomePageBody} from "./HomePageComponents/HomePageBody"
+import type {responseType} from "../Universal_Types/responseType"
 import { useState } from "react";
 import { useEffect } from "react";
 
 import "./HomePage.css"
-
-
-export type responseType = {
-
-    first_name: string,
-    last_name: string,
-    email: string,
-    username: string
-
-
-
-
-}
-
 
 
 export  function HomePage():React.JSX.Element{
@@ -63,7 +50,7 @@ return(
 <div className="HomePageContainer">
 
     
-<HomePageHeader   userInfo = {userDetails}/>
+<NavBar   userInfo = {userDetails} page = "Home"/>
 <HomePageBody   userInfo = {userDetails}/>
 
 

@@ -3,11 +3,14 @@ import liked from "../../assets/icons/liked.svg"
 import posts from "../../assets/icons/posts.svg"
 import tags from "../../assets/icons/tags.svg"
 import profile from "../../assets/icons/profile.svg"
+import "./BTNContainer.css"
+import { useNavigate } from "react-router"
 
 
 
 
-export  function BTNContainer({page}: {page:string}){
+export  function BTNContainer({page, loggedin}: {page:string, loggedin:boolean}){
+  const Navigator = useNavigate();
 
   console.log(page)
 
@@ -28,7 +31,7 @@ export  function BTNContainer({page}: {page:string}){
       key={Element.label}
       style={isActive ? { borderBottom: "solid 2px #60A5FA" } : {}}
     >
-      <button type="button">
+      <button type="button" onClick={()=> loggedin ? Navigator(`/${Element.label.toLowerCase()}`) : Navigator("/signup")}>
         <img src={Element.icon} alt="" />
         <span>{Element.label}</span>
       </button>
