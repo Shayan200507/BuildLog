@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import type  { Express} from "express"
 import {AuthHandler } from "./Routers/AuthRouter.ts"
 import cors from "cors";
+import {ContentHandler} from "./Routers/ContentRouter.ts"
 
 
 
@@ -32,6 +33,7 @@ server.use(session({
 
 //Auth Route
 server.use("/api/auth",AuthHandler)
+server.use("/api/content",ContentHandler)
 
 
 //error handling

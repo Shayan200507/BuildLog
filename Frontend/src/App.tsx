@@ -3,7 +3,7 @@
 import './App.css'
 import {SingupPage} from "./Pages/SignupPage/SignupPage"
 import {HomePage} from "./Pages/HomePage/HomePage"
-import {PostsPage} from "./Pages/PostsPage/PostsPage"
+import {BlogsPage} from "./Pages/BlogsPage/BlogsPage"
 import {LikedPage} from "./Pages/LikedPage/LikedPage"
 import {TagsPage} from "./Pages/TagsPage/TagsPage"
 import {ProfilePage} from "./Pages/ProfilePage/ProfilePage"
@@ -22,7 +22,7 @@ function App() {
        <Route path = "/" element={<HomePage />} />
        <Route path = "/home" element={<HomePage />} />
        <Route path = "/signup" element={<SingupPage />} />
-       <Route path ="/posts" element={<PostsPage />} />
+       <Route path ="/blogs" element={<BlogsPage />} />
        <Route path ="/liked" element={<LikedPage />} />
        <Route path ="/tags" element={<TagsPage />} />
        <Route path ="/profile" element={<ProfilePage />} />
