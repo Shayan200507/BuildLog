@@ -4,6 +4,9 @@ import './App.css'
 import {SingupPage} from "./Pages/SignupPage/SignupPage"
 import {HomePage} from "./Pages/HomePage/HomePage"
 import {PostsPage} from "./Pages/PostsPage/PostsPage"
+import {LikedPage} from "./Pages/LikedPage/LikedPage"
+import {TagsPage} from "./Pages/TagsPage/TagsPage"
+import {ProfilePage} from "./Pages/ProfilePage/ProfilePage"
 import { BrowserRouter, Routes, Route } from "react-router";
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
        <Route path = "/home" element={<HomePage />} />
        <Route path = "/signup" element={<SingupPage />} />
        <Route path ="/posts" element={<PostsPage />} />
+       <Route path ="/liked" element={<LikedPage />} />
+       <Route path ="/tags" element={<TagsPage />} />
+       <Route path ="/profile" element={<ProfilePage />} />
        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 
     </Routes> 

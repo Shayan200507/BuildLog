@@ -1,13 +1,11 @@
-
-import "./PostsPage.css"
+import "./ProfilePage.css"
 import {NavBar} from "../Universal_Containers/NavBar"
 import type { responseType } from "../Universal_Types/responseType";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { PostsPageBTN } from "./PostsPageComponents/PostsPageBTN";
 
-export function PostsPage(){
+export function ProfilePage(){
     const navigate = useNavigate()
 
       const [userDetails,setUserDetails] = useState<responseType>()
@@ -38,11 +36,8 @@ export function PostsPage(){
 
     return(
 
-<div className="PostsPageContainer">
-    <NavBar  userInfo={userDetails} page="Posts"/>
-    <div className="PostsPageBTNContainer">
-        <PostsPageBTN />
-    </div>
+<div className="ProfilePageContainer">
+    <NavBar  userInfo={userDetails} page="Profile"/>
 
 
 </div>
