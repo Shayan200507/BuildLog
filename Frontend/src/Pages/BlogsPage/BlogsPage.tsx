@@ -5,16 +5,11 @@ import type { responseType } from "../Universal_Types/responseType";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { BlogsPageBTN } from "./BlogsPageComponents/BlogsPageBTN";
+import { Body, type BlogType } from "./BlogsPageComponents/Body";
 
 
 
-type ResponseBlogsType = {
-  blog_id: number;
-  name: string;
-  description: string;
-  user_id: number;
-}[]
+type ResponseBlogsType = BlogType[]
 
 
 
@@ -23,12 +18,6 @@ export function BlogsPage(){
 
       const [userDetails,setUserDetails] = useState<responseType>()
       const [userBlogs,setUserBlogs] = useState<ResponseBlogsType>([])
-      const blogs = userBlogs.map((Element) =><li key={Element.blog_id} className="BlogItem">
-  <button type="button">
-    <h2>{Element.name}</h2>
-    <p>{Element.description}</p>
-  </button>
-</li>)
        
         
     
@@ -80,18 +69,7 @@ export function BlogsPage(){
 
 <div className="BlogsPageContainer">
     <NavBar  userInfo={userDetails} page="Blogs"/>
-    <div className="BlogsPageBTNContainer">
-        <BlogsPageBTN />
-    </div>
-
-    <div className="blogsListContainer">
-        <ul className="blogsList">
-            {blogs}
-
-        </ul>
-          
-
-    </div>
+    <Body userBlogs={userBlogs} />
 
 
 </div>

@@ -1,12 +1,14 @@
 
 
 import type { responseType } from "../../Universal_Types/responseType";
+import { useNavigate } from "react-router";
 
 export function BlogsPageBTN({userInfo}: {userInfo?: responseType}){
-console.log(userInfo)
+    console.log(userInfo)
+const Navigate = useNavigate()
 
-    async function handleClick(){
-        console.log("handling")
+   function handleClick(){
+       Navigate("/createBlog")
          
 
 

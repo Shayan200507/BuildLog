@@ -98,6 +98,27 @@ console.log("tags_posts table ready");
 
 
 
+await pool.query(`
+    
+    ALTER TABLE posts
+    ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+
+    ALTER TABLE blogs
+    ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+    
+    
+    
+    
+    `)
+
+    console.log("time stamp added")
+
+
+
+
+
+
 
 
 

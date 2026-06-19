@@ -13,7 +13,7 @@
  }  
 
 .BlogsPageBTN{
-    margin-top: 100px;
+   
     padding: 50px;
 
       background: rgba(20, 18, 60, 0.55);
@@ -34,6 +34,51 @@
     transform: scale(0.96);
 }
 
+
+.BlogsBody{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+
+.BlogsBody ul{  
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 10px;
+
+}
+
+
+
+.BlogItem button{
+      background: rgba(18, 16, 55, 0.82);
+  color: #f8fafc;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  
+  height:fit-content;
+  width: 800px;
+  transition: transform 0.15s ease;
+
+
+
+}
+
+.BlogItem button:active{
+    transform: scale(0.96);
+}
+
+.date-Time-Container{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
 
 
 

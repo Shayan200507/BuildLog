@@ -8,6 +8,7 @@ import {LikedPage} from "./Pages/LikedPage/LikedPage"
 import {TagsPage} from "./Pages/TagsPage/TagsPage"
 import {ProfilePage} from "./Pages/ProfilePage/ProfilePage"
 import { BrowserRouter, Routes, Route } from "react-router";
+import {CreateBlog} from "./Pages/CreateBlog/CreateBlog"
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
        <Route path ="/liked" element={<LikedPage />} />
        <Route path ="/tags" element={<TagsPage />} />
        <Route path ="/profile" element={<ProfilePage />} />
+       <Route path ="/createBlog" element={<CreateBlog />} />
+
        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 
     </Routes> 

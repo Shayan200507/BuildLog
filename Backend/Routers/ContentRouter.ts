@@ -1,6 +1,7 @@
 import  Express  from "express";
 import {getBlogs} from "../Controllers/GetBlogs.ts"
 import {LoggedInCheck} from "../Middleware/LoggedInCheck.ts"
+import {PostBlog} from "../Controllers/PostBlog.ts"
 
 
 export const ContentHandler = Express.Router()
@@ -8,5 +9,6 @@ export const ContentHandler = Express.Router()
 
 
 ContentHandler.get("/blogs",LoggedInCheck,getBlogs)
+ContentHandler.post("/postBlog",LoggedInCheck,getBlogs)
 
 
