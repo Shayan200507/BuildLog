@@ -4,6 +4,8 @@ import type { responseType } from "../Universal_Types/responseType";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+import {CreateBlogBody} from "./CreateBlogComponents/CreateBlogBody"
+
 export function CreateBlog(){
   const navigate = useNavigate()
   const [userDetails,setUserDetails] = useState<responseType>()
@@ -22,6 +24,7 @@ export function CreateBlog(){
   return(
     <div className="CreateBlogContainer">
       <NavBar userInfo={userDetails} page="Blogs" />
+      <CreateBlogBody/>
     </div>
   )
 }
