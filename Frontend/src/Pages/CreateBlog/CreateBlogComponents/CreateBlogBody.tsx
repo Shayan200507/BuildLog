@@ -4,7 +4,19 @@ export function CreateBlogBody(){
     const Navigate = useNavigate()
 
 async function handleSubmit(data: FormData){
-    console.log(data)
+    fetch("http://localhost:8000/api/content/postBlog",{
+        credentials: "include",
+        method: "post",
+        body: JSON.stringify({
+            name: data.get("name") as string,
+            Description: data.get("description") as string
+
+        }),
+        headers: {
+              'Content-Type': 'application/json'
+              },
+
+    })
 }
 
 return(

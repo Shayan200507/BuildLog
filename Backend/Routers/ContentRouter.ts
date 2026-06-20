@@ -9,6 +9,6 @@ export const ContentHandler = Express.Router()
 
 
 ContentHandler.get("/blogs",LoggedInCheck,getBlogs)
-ContentHandler.post("/postBlog",LoggedInCheck,getBlogs)
+ContentHandler.post("/postBlog",LoggedInCheck,PostBlog)
 
 
