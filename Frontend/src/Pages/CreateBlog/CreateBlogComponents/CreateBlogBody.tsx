@@ -1,15 +1,39 @@
 import { useNavigate } from "react-router"
+import { useState } from "react"
 
 export function CreateBlogBody(){
     const Navigate = useNavigate()
+    const [error,setError] = useState<string>()
+ 
+
+type CreateBlogResponse = {
+  blog_id: number
+  name: string
+  description: string
+  created_at: string
+}
+
+type ErrorResponse = {
+  message: string
+}
+
+
+
+
+
 
 async function handleSubmit(data: FormData){
-    fetch("http://localhost:8000/api/content/postBlog",{
+
+  
+
+
+
+   const res= await  fetch("http://localhost:8000/api/content/postBlog",{
         credentials: "include",
         method: "post",
         body: JSON.stringify({
             name: data.get("name") as string,
-            Description: data.get("description") as string
+            description: data.get("description") as string
 
         }),
         headers: {
@@ -17,11 +41,31 @@ async function handleSubmit(data: FormData){
               },
 
     })
+
+    if(res.ok){
+        Navigate("/blogs")
+        const data:CreateBlogResponse = await res.json()
+        console.log(data)
+    }
+    else{
+        const err:ErrorResponse = await res.json()
+        setError(err.message)
+
+    }
+
+
+
+
+
+
+
 }
 
 return(
 
 <div className="CreateBlogBodyContainer">
+
+    
 
 <div className="buttonContainer">  
 <button  onClick={()=>Navigate("/blogs")}>Exit</button>
@@ -29,6 +73,7 @@ return(
 
 
 <div className="formContainer">
+    <h1>{error}</h1>
     <h1>Create Your Blog!</h1>
 <form action={handleSubmit}>
 
