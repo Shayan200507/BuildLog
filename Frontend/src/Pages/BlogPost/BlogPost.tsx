@@ -4,12 +4,14 @@ import "./BlogPost.css"
 import type { responseType } from "../Universal_Types/responseType";
 import  { useNavigate } from "react-router";
 import { NavBar } from "../Universal_Containers/NavBar";
+import { useParams } from "react-router";
 
 
 export  function BlogPost(){
 
 const [userDetails,setUserDetails] = useState<responseType>()
 const navigate = useNavigate()
+const {blogid} = useParams()
 
 
 
