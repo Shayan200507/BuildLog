@@ -43,8 +43,9 @@ async function handleSubmit(data: FormData){
     })
 
     if(res.ok){
-        Navigate("/blogs")
+        
         const data:CreateBlogResponse = await res.json()
+        Navigate(`/blogPosts/${data.blog_id}`)
         console.log(data)
     }
     else{

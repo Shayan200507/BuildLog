@@ -9,7 +9,7 @@ import {TagsPage} from "./Pages/TagsPage/TagsPage"
 import {ProfilePage} from "./Pages/ProfilePage/ProfilePage"
 import { BrowserRouter, Routes, Route } from "react-router";
 import {CreateBlog} from "./Pages/CreateBlog/CreateBlog"
-
+import {BlogPost} from "./Pages/BlogPost/BlogPost"
 function App() {
 
 
@@ -28,6 +28,7 @@ function App() {
        <Route path ="/tags" element={<TagsPage />} />
        <Route path ="/profile" element={<ProfilePage />} />
        <Route path ="/createBlog" element={<CreateBlog />} />
+       <Route path ="/blogPosts/:blog_id" element={<BlogPost />} />
 
        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 

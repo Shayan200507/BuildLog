@@ -1,4 +1,5 @@
 import { BlogsPageBTN } from "./BlogsPageBTN";
+import { useNavigate } from "react-router";
 
 export type BlogType = {
   blog_id: number;
@@ -9,9 +10,15 @@ export type BlogType = {
 }
 
 export function Body({userBlogs}: {userBlogs: BlogType[]}){
+
+
+  const navigate = useNavigate()
+
+
+
   const blogs = userBlogs.map((Element) => (
     <li key={Element.blog_id} className="BlogItem">
-      <button type="button">
+      <button type="button" onClick={()=>{navigate(`/blogPosts/${Element.blog_id}`)}}>
         <h2>{Element.name}</h2>
         <p>{Element.description}</p>
         <div className="date-Time-Container">

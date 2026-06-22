@@ -1,1 +1,45 @@
 
+.BlogPostContainer{
+
+
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #1e1b4b, #3730a3, #4c1d95);
+  font-family: "Inter", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+
+
+
+
+
+
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.buttonContainer button{
+  background: orangered;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.buttonContainer button:hover{
+  background: rgb(150, 0, 0);
+}
+
+.buttonContainer button:active{
+  transform: scale(0.96);
+}

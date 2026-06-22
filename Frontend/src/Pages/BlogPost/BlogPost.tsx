@@ -1,13 +1,16 @@
 
 import { useState,useEffect } from "react";
+import "./BlogPost.css"
 import type { responseType } from "../Universal_Types/responseType";
-import  type { useNavigate } from "react-router";
+import  { useNavigate } from "react-router";
+import { NavBar } from "../Universal_Containers/NavBar";
 
 
 export  function BlogPost(){
 
-const [userDetails,setUserDetails] = useEffect<responseType>()
+const [userDetails,setUserDetails] = useState<responseType>()
 const navigate = useNavigate()
+
 
 
 
@@ -36,7 +39,12 @@ const navigate = useNavigate()
 
 
 
-            <></>
+            <div className="BlogPostContainer">
+                <NavBar userInfo={userDetails} page="Blogs" />
+                <div className="buttonContainer">
+                    <button onClick={() => navigate("/blogs")}>Exit</button>
+                </div>
+            </div>
         )
 
 
