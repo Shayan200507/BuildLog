@@ -6,10 +6,22 @@ import  { useNavigate } from "react-router";
 import { NavBar } from "../Universal_Containers/NavBar";
 import { useParams } from "react-router";
 
+type BlogPostRow = {
+    name: string
+    post_id: number
+    title: string
+    created_at: string
+    imgurl: string | null
+    tag_title: string | null
+}
+
+type GetPostsResponse = BlogPostRow[]
+
 
 export  function BlogPost(){
 
 const [userDetails,setUserDetails] = useState<responseType>()
+const [postsData,setPostsData] = useState<GetPostsResponse>([])
 const navigate = useNavigate()
 const {blogid} = useParams()
 
@@ -34,6 +46,19 @@ const {blogid} = useParams()
     
     
         },[navigate])
+
+
+    useEffect(()=>{
+
+           fetch(`http://localhost:8000/api/content/posts/${blogid}`,{
+            method: "GET",
+             credentials: "include",
+            }).then(res=> res.json()).then(data=>setPostsData(data))
+
+
+
+
+    })    
 
 
 
