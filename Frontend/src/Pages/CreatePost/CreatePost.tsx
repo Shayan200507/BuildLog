@@ -1,4 +1,4 @@
-import "./CreatePost.css"
+  import "./CreatePost.css"
 import { NavBar } from "../Universal_Containers/NavBar"
 import type { responseType } from "../Universal_Types/responseType"
 import { useEffect, useState } from "react"

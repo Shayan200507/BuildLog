@@ -65,11 +65,7 @@ await pool.query(`
     tag_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     tag_title  TEXT UNIQUE NOT NULL
 
-    
-    
-    
-    
-    
+
     )
     
     
