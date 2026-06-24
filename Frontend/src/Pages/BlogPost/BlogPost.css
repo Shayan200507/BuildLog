@@ -43,3 +43,50 @@
 .buttonContainer button:active{
   transform: scale(0.96);
 }
+
+.postsListContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20px 40px;
+  box-sizing: border-box;
+}
+
+.postsListElement img {
+  width: 100px;
+}
+
+.postsListContainer > ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: min(800px, 100%);
+  margin: 0;
+  padding: 0;
+}
+
+.postsListElement {
+  width: 100%;
+}
+
+.postsListElement > button {
+  width: 100%;
+}
+
+.tagsList{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+

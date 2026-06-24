@@ -12,7 +12,7 @@ type BlogPostRow = {
     title: string
     created_at: string
     imgurl: string | null
-    tag_title: string | null
+    tags: string[]
 }
 
 type GetPostsResponse = BlogPostRow[]
@@ -23,7 +23,8 @@ export  function BlogPost(){
 const [userDetails,setUserDetails] = useState<responseType>()
 const [postsData,setPostsData] = useState<GetPostsResponse>([])
 const navigate = useNavigate()
-const {blogid} = useParams()
+const {blog_id} = useParams()
+console.log(`ur blog id is ${blog_id}`)
 
 
 
@@ -50,7 +51,7 @@ const {blogid} = useParams()
 
     useEffect(()=>{
 
-           fetch(`http://localhost:8000/api/content/posts/${blogid}`,{
+           fetch(`http://localhost:8000/api/content/posts/${blog_id}`,{
             method: "GET",
              credentials: "include",
             }).then(res=> res.json()).then(data=>setPostsData(data))
@@ -58,7 +59,18 @@ const {blogid} = useParams()
 
 
 
-    })    
+    }, [blog_id])  
+    
+    
+    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement"><button>
+        
+        <h1>{Element.title}</h1>
+        <p>{Element.name}</p>
+        <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement">{tagElement}</li>})}</ul>
+        <img src={Element.imgurl as string} alt={Element.title} />
+        
+        
+        </button></li> })
 
 
 
@@ -70,6 +82,12 @@ const {blogid} = useParams()
                 <NavBar userInfo={userDetails} page="Blogs" />
                 <div className="buttonContainer">
                     <button onClick={() => navigate("/blogs")}>Exit</button>
+                </div>
+                <div className="postsListContainer">
+                 <ul>
+                    {renderedPostsData}
+
+                 </ul>
                 </div>
             </div>
         )

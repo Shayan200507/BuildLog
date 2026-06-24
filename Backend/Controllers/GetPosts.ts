@@ -8,7 +8,9 @@ export async function getPosts(req:Request, res:Response){
     const blogdata = req.params 
    
    
+   
     const blogid:number = Number(blogdata.blog_id)
+    console.log(blogid)
     if(Number.isNaN(blogid)){
         throw "Blog id is invalid"
     }
@@ -18,25 +20,43 @@ export async function getPosts(req:Request, res:Response){
 
     const data = await pool.query(`
         
-        SELECT blogs.name,posts.post_id,posts.title,posts.created_at,posts.imgurl,tags.tag_title FROM posts 
+        SELECT blogs.name,posts.post_id,posts.title,posts.created_at,posts.imgurl,
+        COALESCE(
+        array_agg(tags.tag_title) FILTER (WHERE tags.tag_title is NOT NULL),'{}' 
+        ) AS tags
+        
+        
+        
+        FROM posts 
         LEFT JOIN blogs ON
         blogs.blog_id = posts.blog_id
-        LEFT JOIN tags_post ON
-        tags_post.post_id = posts.post_id
+        LEFT JOIN tags_posts ON
+        tags_posts.post_id = posts.post_id
         LEFT JOIN tags ON 
-        tags.tag_id = tags_post.tag_id
+        tags.tag_id = tags_posts.tag_id
 
-        WHERE posts.blog_id = $1;
+        WHERE posts.blog_id = $1
+
+        GROUP BY
+          blogs.name,
+          posts.post_id,
+          posts.title,
+          posts.created_at,
+          posts.imgurl
+
 
     
         `,[blogid])
+
+
+        console.log("the data"+data.rows)
 
         res.json(data.rows)
 
 
     }
     catch(error){
-    
+    console.log(error)
     }
 
 
