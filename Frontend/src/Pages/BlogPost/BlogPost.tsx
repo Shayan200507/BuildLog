@@ -62,12 +62,18 @@ console.log(`ur blog id is ${blog_id}`)
     }, [blog_id])  
     
     
-    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement"><button>
+    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement" key={Element.post_id}><button onClick={() => navigate(`/readPost/${Element.post_id}`)}>
         
-        <h1>{Element.title}</h1>
+        
+
+         <img src={Element.imgurl as string} alt={Element.title} />
+        <div className="elementDetails">
+        <h1>{Element.title}</h1>    
         <p>{Element.name}</p>
-        <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement">{tagElement}</li>})}</ul>
-        <img src={Element.imgurl as string} alt={Element.title} />
+        <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement" key={tagElement}>{tagElement}</li>})}</ul>
+        </div>
+        
+       
         
         
         </button></li> })
@@ -84,7 +90,7 @@ console.log(`ur blog id is ${blog_id}`)
                     <button onClick={() => navigate("/blogs")}>Exit</button>
                 </div>
                 <div className="postsListContainer">
-                 <ul>
+                 <ul className="postsList">
                     {renderedPostsData}
 
                  </ul>
