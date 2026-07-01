@@ -3,6 +3,11 @@ import { useNavigate, useParams } from "react-router"
 import "./ReadPostPage.css"
 import { NavBar } from "../Universal_Containers/NavBar"
 import type { responseType } from "../Universal_Types/responseType"
+import heartOutline from "../../assets/like-icons/heart-outline.svg"
+import heartFilled from "../../assets/like-icons/heart-filled.svg"
+
+
+
 
 type ReadPostResponse = {
   title: string
@@ -89,25 +94,20 @@ const tagsList = postData?.tags.map((Element) =>{ return <li>
 
           {tagsList}
         </ul>
-        <p>by: {postData?.first_name} {postData?.last_name}</p>
 
+      <div className="postMetaContainer">
+        <p>by: {postData?.first_name} {postData?.last_name}</p>   
+      <div className="likeBtnContainer"></div>
+      </div>
+       
        </div>
 
       <div className="postBody" >
            {postData?.body}
-           ext to copy apste
-
-
-
-4:09 AM
-
-
-
-
-
-
-Building a project is rarely a straight path. Each feature introduces new ideas, unexpected problems, and opportunities to improve. The important part is to keep experimenting, learning from mistakes, and making steady progress.
+           
       </div>
+
+      
 
 
 

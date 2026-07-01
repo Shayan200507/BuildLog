@@ -62,7 +62,7 @@ console.log(`ur blog id is ${blog_id}`)
     }, [blog_id])  
     
     
-    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement" key={Element.post_id}><button onClick={() => navigate(`/readPost/${Element.post_id}`)}>
+    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement" key={Element.post_id}><button className="navigateBtn" onClick={() => navigate(`/readPost/${Element.post_id}`)}>
         
         
 

@@ -114,6 +114,24 @@ await pool.query(`
 
 
 
+    await pool.query(`
+    
+    
+    CREATE TABLE IF NOT EXISTS like_table(   
+    post_id  INTEGER NOT NULL REFERENCES posts(post_id) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (post_id, user_id)
+    
+    
+    )
+    
+    
+    `)
+
+    console.log("like table added")
+
+
 
 
 

@@ -26,4 +26,19 @@
 }
 
 
+.subrowContainer{
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+
+.likedButton{
+  border: none;
+  width: 22px;
+  height: 22px;
+
+}
+
 

@@ -29,7 +29,9 @@ export async function getLatestPost(req:Request, res:Response){
 
 
             GROUP BY
-            posts.title, posts.body, 
+            posts.title, 
+            posts.body,
+            posts.post_id, 
             posts.imgurl, 
             users.username, 
             users.email, 
@@ -38,7 +40,7 @@ export async function getLatestPost(req:Request, res:Response){
 
 
             
-            ORDER BY created_at DESC
+            ORDER BY posts.created_at DESC
             LIMIT 5
             
             
@@ -47,7 +49,7 @@ export async function getLatestPost(req:Request, res:Response){
             `)
 
 
-            res.json(latestPosts)
+            res.json(latestPosts.rows)
 
 
 
