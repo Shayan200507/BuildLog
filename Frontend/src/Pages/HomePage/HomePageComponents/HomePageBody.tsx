@@ -2,10 +2,7 @@
 import type React from "react";
 import type {responseType} from "../../Universal_Types/responseType"
 import { useState, useEffect } from "react";
-import likeLogo from "../../../assets/like-icons/heart-outline.svg"
-import likedLogo from "../../../assets/like-icons/heart-filled.svg"
-
-import { useNavigate } from "react-router";
+import { PostCard } from "../../Universal_Containers/PostCard";
 
 
 type BlogPostRow = {
@@ -23,18 +20,10 @@ type BlogPostRow = {
 
 type GetPostsResponse = BlogPostRow[]
 
-
-
-
-
-
-
-
 export function HomePageBody(props: {userInfo: responseType|undefined}):React.JSX.Element{
    
 const [postsData,setPostsData] = useState<GetPostsResponse>([])
 
-const navigate = useNavigate()
 
 useEffect(()=>{
    fetch("http://localhost:8000/api/content/latestPosts",{
@@ -49,25 +38,9 @@ useEffect(()=>{
 
 },[])
 
-const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement" key={Element.post_id}><button className="navigateBtn" onClick={() => navigate(`/readPost/${Element.post_id}`)}>
-        
-        
-
-         <img src={Element.imgurl as string} alt={Element.title} />
-        <div className="elementDetails">
-        <h1>{Element.title}</h1>    
-        <p>{Element.name}</p>
-        <div className="subrowContainer">
-        <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement" key={tagElement}>{tagElement}</li>})}</ul>
-        <img className="likeimg"  src={likeLogo}/>
-        </div>
-        
-        </div>
-        
-       
-        
-        
-        </button></li> })
+const renderedPostsData = postsData.map((post) => (
+  <PostCard post={post} key={post.post_id} />
+))
 
   
 

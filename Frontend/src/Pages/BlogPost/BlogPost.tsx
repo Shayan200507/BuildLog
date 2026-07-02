@@ -5,7 +5,7 @@ import type { responseType } from "../Universal_Types/responseType";
 import  { useNavigate } from "react-router";
 import { NavBar } from "../Universal_Containers/NavBar";
 import { useParams } from "react-router";
-import likeLogo from "../../assets/like-icons/heart-outline.svg";
+import { PostCard } from "../Universal_Containers/PostCard";
 
 type BlogPostRow = {
     name: string
@@ -63,24 +63,9 @@ console.log(`ur blog id is ${blog_id}`)
     }, [blog_id])  
     
     
-    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement" key={Element.post_id}><button className="navigateBtn" onClick={() => navigate(`/readPost/${Element.post_id}`)}>
-        
-        
-
-         <img src={Element.imgurl as string} alt={Element.title} />
-        <div className="elementDetails">
-        <h1>{Element.title}</h1>    
-        <p>{Element.name}</p>
-        <div className="subrowContainer">
-        <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement" key={tagElement}>{tagElement}</li>})}</ul>
-        <img className="likeimg" src={likeLogo} alt="Like post" />
-        </div>
-        </div>
-        
-       
-        
-        
-        </button></li> })
+    const renderedPostsData = postsData.map((post) => (
+      <PostCard post={post} key={post.post_id} />
+    ))
 
 
 
