@@ -3,9 +3,9 @@ import type { Request, Response } from "express";
 import {pool} from "../Database/Connection.ts"
 
 
-export async function getLikeStatus(res: Response, req: Request){
+export async function getLikeStatus( req: Request, res: Response){
 
-    const {postid} = req.params
+    const {post_id} = req.params
 
 
     try{
@@ -18,7 +18,7 @@ export async function getLikeStatus(res: Response, req: Request){
         
             
             
-            `,[postid])
+            `,[post_id])
 
 
 
@@ -29,12 +29,12 @@ export async function getLikeStatus(res: Response, req: Request){
             SELECT EXISTS(
             SELECT * FROM like_table
             WHERE
-            post_id = $1,
+            post_id = $1  AND
             user_id = $2
             
-            ) AS likedByUser
+            ) AS "likedByUser"
                  
-            `,[postid,req.session.userID])
+            `,[post_id,req.session.userID])
 
 
         res.json({
@@ -49,6 +49,9 @@ export async function getLikeStatus(res: Response, req: Request){
         else{
             res.json(likeCount.rows[0]);return
         }
+
+
+        
         
      
 

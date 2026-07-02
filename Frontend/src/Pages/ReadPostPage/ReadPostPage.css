@@ -60,7 +60,7 @@
   align-items: center;
 }
 
-.titleContainer img{
+.titleContainer >img{
   width: 400px ;
   height: 200px;
   border-radius: 5px;
@@ -76,4 +76,46 @@
   max-height: 800px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+
+
+.postMetaContainer{
+
+   display: flex;
+   align-items: center;
+   gap: 10px;
+
+
+
+}
+
+
+
+
+.likeBtnContainer > button{
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  border-radius: 999px;
+  padding: 5px;
+  width: 60px;
+  height: 30px;
+  color: white;
+transition: ease 15ms;
+
+}
+.likeBtnContainer > button:active{
+  transform: scale(0.95);
+}
+
+
+.ReadPostPageContainer .likeBtnContainer > button > img {
+  width: 20px;
+  height: 20px;
+  display: block;
 }

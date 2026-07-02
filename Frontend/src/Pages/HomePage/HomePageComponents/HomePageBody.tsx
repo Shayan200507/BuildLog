@@ -59,7 +59,7 @@ const renderedPostsData=postsData.map((Element)=>{return <li className="postsLis
         <p>{Element.name}</p>
         <div className="subrowContainer">
         <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement" key={tagElement}>{tagElement}</li>})}</ul>
-        <img className="likedButton"  src={likeLogo}/>
+        <img className="likeimg"  src={likeLogo}/>
         </div>
         
         </div>

@@ -7,7 +7,10 @@ import heartOutline from "../../assets/like-icons/heart-outline.svg"
 import heartFilled from "../../assets/like-icons/heart-filled.svg"
 
 
-
+type likeResponse = {
+  like_count: number
+  likedByUser?: boolean
+}
 
 type ReadPostResponse = {
   title: string
@@ -26,7 +29,47 @@ export function ReadPostPage() {
   const { post_id } = useParams()
   const [userDetails, setUserDetails] = useState<responseType>()
   const [postData, setPostData] = useState<ReadPostResponse>()
+  const [likeStatus,setLikeStatus] = useState<string>(heartOutline)
+  const[likeCount,setLikeCount] = useState<number>(0)
 
+  
+  async function LikeHandle(){
+
+
+
+     const res =  await fetch(`http://localhost:8000/api/content/updateLikeStatus/${post_id}`, {
+  method: "POST",
+  credentials: "include"
+}); 
+
+ if(res.ok){
+           if (likeStatus === heartFilled) {
+    setLikeStatus(heartOutline);
+   
+     } else {
+      setLikeStatus(heartFilled);
+   
+      }
+
+ }
+ else{
+    console.log("something went wrong")
+ }
+
+
+
+
+      
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
   useEffect(() => {
     fetch("http://localhost:8000/api/auth/me", {
       method: "GET",
@@ -67,6 +110,28 @@ useEffect(()=>{
 },[])
 
 
+
+useEffect(()=>{
+fetch(`http://localhost:8000/api/content/postsLikeInfo/${post_id}`, {
+  method: "GET",
+  credentials: "include",
+}).then((res)=>{
+
+  if(res.ok){
+    return res.json()
+  }
+  throw new Error("internal error")
+
+
+}).then((data:likeResponse) =>{setLikeStatus(data.likedByUser ? heartFilled : heartOutline);setLikeCount(data.like_count)})
+
+
+
+},[likeStatus])
+
+
+
+
 const tagsList = postData?.tags.map((Element) =>{ return <li>
 {Element}
 </li>})
@@ -97,7 +162,7 @@ const tagsList = postData?.tags.map((Element) =>{ return <li>
 
       <div className="postMetaContainer">
         <p>by: {postData?.first_name} {postData?.last_name}</p>   
-      <div className="likeBtnContainer"></div>
+      <div className="likeBtnContainer"><button  onClick={()=>LikeHandle()} ><img src={likeStatus}/><p>{likeCount}</p></button></div>
       </div>
        
        </div>

@@ -142,3 +142,14 @@ gap: 5px;
   align-items: center;
 }
 
+.BlogPostContainer .subrowContainer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.BlogPostContainer .likeimg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}

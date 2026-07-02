@@ -5,6 +5,7 @@ import type { responseType } from "../Universal_Types/responseType";
 import  { useNavigate } from "react-router";
 import { NavBar } from "../Universal_Containers/NavBar";
 import { useParams } from "react-router";
+import likeLogo from "../../assets/like-icons/heart-outline.svg";
 
 type BlogPostRow = {
     name: string
@@ -70,7 +71,10 @@ console.log(`ur blog id is ${blog_id}`)
         <div className="elementDetails">
         <h1>{Element.title}</h1>    
         <p>{Element.name}</p>
+        <div className="subrowContainer">
         <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement" key={tagElement}>{tagElement}</li>})}</ul>
+        <img className="likeimg" src={likeLogo} alt="Like post" />
+        </div>
         </div>
         
        
