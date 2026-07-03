@@ -36,7 +36,7 @@ export async function getLatestPost(req:Request, res:Response){
             users.username, 
             users.email, 
             users.first_name,  
-            users.last_name, blogs.name
+            users.last_name, blogs.name,posts.created_at
 
 
             
