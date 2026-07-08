@@ -4,6 +4,8 @@ import type { responseType } from "../Universal_Types/responseType";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import type {PostCardData} from "../Universal_Types/postCardData"
+import {PostCard} from "../Universal_Containers/PostCard"
 
 
 type tagElement = {
@@ -19,8 +21,17 @@ export function TagsPage(){
       const [userDetails,setUserDetails] = useState<responseType>()
      const [tagsList,setTagsList] = useState<tagElement[]>() 
      const [selectedTagsList,setSelectedTagsList] = useState<tagElement[]>() 
+     const [filteredPosts,setFilteredPosts] = useState<PostCardData[]>([])
        
-        
+     
+     
+ const renderFilteredPosts = filteredPosts.map((Element)=>{ return <PostCard post={Element}  />
+  })
+
+
+
+
+
     async function addSelection(element: tagElement){
         setSelectedTagsList((selectedTagsList) => [...(selectedTagsList ?? []),element])
         setTagsList((tagsList) => {
@@ -34,6 +45,37 @@ export function TagsPage(){
         return outList
        
     })
+
+    const response =await  fetch("http://localhost:8000/api/content/getFilteredPosts",{
+      
+       credentials: "include",
+       method: "POST",
+         headers: {
+    "Content-Type": "application/json",
+     },
+     body: JSON.stringify(selectedTagsList ?? [])
+
+
+
+
+    })
+
+    
+
+    if(!response.ok){const data = await response.json(); console.log(data.message)}
+    else{
+        const filteredList: PostCardData[] = await response.json()
+        setFilteredPosts(filteredList)
+
+        
+
+
+    }
+
+      
+
+
+
     }
 
 
@@ -52,6 +94,41 @@ export function TagsPage(){
         return outList
        
     })
+
+     
+    const response =await  fetch("http://localhost:8000/api/content/getFilteredPosts",{
+      
+       credentials: "include",
+       method: "POST",
+         headers: {
+    "Content-Type": "application/json",
+     },
+     body: JSON.stringify(selectedTagsList ?? [])
+
+
+
+
+    })
+
+    
+
+    if(!response.ok){const data = await response.json(); console.log(data.message)}
+    else{
+        const filteredList: PostCardData[] = await response.json()
+        setFilteredPosts(filteredList)
+
+        
+
+
+    }
+
+
+
+
+
+
+
+
         
     }
 
@@ -133,6 +210,14 @@ fetch("http://localhost:8000/api/content/getTags", {
     <div className="TagTableHeadingContainer"><h1>Selected Tags</h1></div>
     <ul className="tagsPageList">{renderSelectedTagList}</ul>
     </div>  
+
+
+    <div className="filteredPostsContainer">
+<ul className="filteredPostsList">
+    {renderFilteredPosts}
+
+</ul>
+    </div>
 
 
 </div>

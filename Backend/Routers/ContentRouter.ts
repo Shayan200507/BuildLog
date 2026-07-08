@@ -9,6 +9,7 @@ import {getLikeStatus} from "../Controllers/GetLikeStatus.ts"
 import {changeLikeStatus} from "../Controllers/ChangeLikeStatus.ts"
 import {getLikedPosts} from "../Controllers/GetLikedPosts.ts"
 import {getTags} from "../Controllers/GetTags.ts"
+import {getFilteredPosts} from "../Controllers/GetFilteredPosts.ts"
 
 
 export const ContentHandler = Express.Router()
@@ -24,3 +25,4 @@ ContentHandler.get("/postsLikeInfo/:post_id",getLikeStatus)
 ContentHandler.post("/updateLikeStatus/:post_id",LoggedInCheck,changeLikeStatus)
  ContentHandler.get("/getLikedPosts",LoggedInCheck,getLikedPosts)
  ContentHandler.get("/getTags",getTags)
+ ContentHandler.post("/getFilteredPosts",getFilteredPosts)

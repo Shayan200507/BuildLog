@@ -8,7 +8,7 @@ export async function getLatestPost(req:Request, res:Response){
 
          const latestPosts =  await pool.query(`
             
-        SELECT  posts.post_id,  posts.title, posts.body, posts.imgurl, users.username, users.email, users.first_name,  users.last_name, blogs.name,  
+        SELECT  posts.post_id,  posts.title, posts.body, posts.imgurl, blogs.name,  
             COALESCE(
              array_agg(tags.tag_title) FILTER (WHERE tags.tag_title is NOT NULL),'{}' 
             ) AS tags

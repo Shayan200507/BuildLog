@@ -15,20 +15,19 @@ export async function getFilteredPosts(req:Request, res: Response){
      try{
            const  returnData = await pool.query(`
              
-            SELECT posts.post_id,  posts.title, posts.body, posts.imgurl, users.username, users.email, users.first_name,  users.last_name, blogs.name,  
+           SELECT  posts.post_id,  posts.title, posts.body, posts.imgurl, blogs.name,  
             COALESCE(
              array_agg(tags.tag_title) FILTER (WHERE tags.tag_title is NOT NULL),'{}' 
             ) AS tags
-            
             
             FROM posts
 
             LEFT JOIN blogs ON
             posts.blog_id = blogs.blog_id 
-            LEFT JOIN tags_post ON
-            posts.post_id = tags_post.post_id
+            LEFT JOIN tags_posts ON
+            posts.post_id = tags_posts.post_id
             LEFT JOIN tags ON
-            tags.tag_id = tags_post.tag_id
+            tags.tag_id = tags_posts.tag_id
 
             WHERE tags.tag_id = ANY($1::int[])
 
@@ -37,13 +36,12 @@ export async function getFilteredPosts(req:Request, res: Response){
             posts.title, 
             posts.body, 
             posts.imgurl, 
-            users.username, 
-            users.email, 
-            users.first_name,  
-            users.last_name, 
-            blogs.name
+         
+            blogs.name,
+            posts.created_at
 
             HAVING COUNT(tags.tag_id) = $2
+            ORDER BY posts.created_at DESC
 
             
             
@@ -55,6 +53,7 @@ export async function getFilteredPosts(req:Request, res: Response){
 
      }
      catch(error){
+        console.log(error)
         res.status(500).json({message: "Internal server error"})
      }
 
