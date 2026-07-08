@@ -30,7 +30,7 @@
 }
 
 
-.buttonContainer button{
+.buttonContainer > button{
     background: orangered;
   color: white;
   border: none;
@@ -42,12 +42,12 @@
 }
 
 
-.buttonContainer button:hover{
+.buttonContainer> button:hover{
    background: rgb(150, 0, 0); 
 }
 
 
-.buttonContainer button:active{
+.buttonContainer> button:active{
   transform: scale(0.96);
 }
 
@@ -93,7 +93,7 @@
   height: 200px;
 }
 
-.formContainer form button{
+.formContainer> form> button{
       background: orangered;
   color: white;
   border: none;
@@ -104,11 +104,11 @@
 
 }
 
-.formContainer form button:hover{
+.formContainer> form> button:hover{
    background: rgb(150, 0, 0); 
 }
 
-.formContainer form button:active{
+.formContainer> form >button:active{
   transform: scale(0.96);
 }
 

@@ -43,3 +43,25 @@
 .buttonContainer button:active{
   transform: scale(0.96);
 }
+
+.createPostBtn{
+    padding: 50px;
+
+      background: rgba(20, 18, 60, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border: none;
+
+  border-radius: 5px;
+  color: white;
+  width: 500px;
+  transition: transform 0.15s ease;
+  cursor: pointer;
+
+}
+
+.createPostBtn :active{
+   transform: scale(0.96);
+
+}

@@ -11,6 +11,11 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import {CreateBlog} from "./Pages/CreateBlog/CreateBlog"
 import {BlogPost} from "./Pages/BlogPost/BlogPost"
 import {ReadPostPage} from "./Pages/ReadPostPage/ReadPostPage"
+import {CreatePost} from "./Pages/CreatePost/CreatePost"
+
+
+
+
 function App() {
 
 
@@ -30,8 +35,8 @@ function App() {
        <Route path ="/profile" element={<ProfilePage />} />
        <Route path ="/createBlog" element={<CreateBlog />} />
        <Route path ="/blogPosts/:blog_id" element={<BlogPost />} />
-       <Route path ="/readPost/:post_id" element={<ReadPostPage />} />
-
+       <Route path ="/readPost/:blog_id/:post_id" element={<ReadPostPage />} />
+       <Route path = "/createPost/:blog_id" element={<CreatePost/>}/>
        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 
     </Routes> 

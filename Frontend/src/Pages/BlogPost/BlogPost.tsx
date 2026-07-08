@@ -5,7 +5,6 @@ import type { responseType } from "../Universal_Types/responseType";
 import  { useNavigate } from "react-router";
 import { NavBar } from "../Universal_Containers/NavBar";
 import { useParams } from "react-router";
-import { PostCard } from "../Universal_Containers/PostCard";
 
 type BlogPostRow = {
     name: string
@@ -63,9 +62,21 @@ console.log(`ur blog id is ${blog_id}`)
     }, [blog_id])  
     
     
-    const renderedPostsData = postsData.map((post) => (
-      <PostCard post={post} key={post.post_id} />
-    ))
+    const renderedPostsData=postsData.map((Element)=>{return <li className="postsListElement" key={Element.post_id}><button className="navigateBtn" onClick={() => navigate(`/readPost/${blog_id}/${Element.post_id}`)}>
+        
+        
+
+        <img src={Element.imgurl as string} alt={Element.title} />
+        <div className="elementDetails">
+        <h1>{Element.title}</h1>    
+        <p>{Element.name}</p>
+        <ul className="tagsList">{Element.tags.map((tagElement)=>{return <li className="tagElement" key={tagElement}>{tagElement}</li>})}</ul>
+        </div>
+        
+       
+        
+        
+        </button></li> })
 
 
 
@@ -84,6 +95,8 @@ console.log(`ur blog id is ${blog_id}`)
 
                  </ul>
                 </div>
+
+                <button className="createPostBtn" onClick={()=>navigate(`/createPost/${blog_id}`)}>Create Post</button>
             </div>
         )
 
