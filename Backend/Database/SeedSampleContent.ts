@@ -13,42 +13,42 @@ const samplePosts: SamplePost[] = [
     blogName: "Frontend Notes",
     title: "Building a Responsive Post Layout",
     body: "A practical walkthrough of responsive layouts, image sizing, and readable spacing across desktop and mobile screens.",
-    imgurl: "/src/assets/post-images/responsive-design.png",
+    imgurl: "http://localhost:8000/uploads/post-images/responsive-design.png",
     tags: ["React", "TypeScript", "CSS", "Frontend"],
   },
   {
     blogName: "Frontend Notes",
     title: "A Calm Developer Workspace",
     body: "Small improvements to component structure and development workflow can make frontend work easier to understand and maintain.",
-    imgurl: "/src/assets/post-images/developer-workspace.png",
+    imgurl: "http://localhost:8000/uploads/post-images/developer-workspace.png",
     tags: ["React", "Productivity", "Frontend"],
   },
   {
     blogName: "Backend Journal",
     title: "Designing Relational Database Tables",
     body: "Learn how primary keys, foreign keys, and join tables model one-to-many and many-to-many relationships in PostgreSQL.",
-    imgurl: "/src/assets/post-images/database-design.png",
+    imgurl: "http://localhost:8000/uploads/post-images/database-design.png",
     tags: ["PostgreSQL", "Database", "Backend"],
   },
   {
     blogName: "Backend Journal",
     title: "Debugging an Express API",
     body: "A repeatable process for tracing request parameters, checking SQL queries, and returning useful HTTP error responses.",
-    imgurl: "/src/assets/post-images/debugging-session.png",
+    imgurl: "http://localhost:8000/uploads/post-images/debugging-session.png",
     tags: ["Express", "TypeScript", "Debugging", "Backend"],
   },
   {
     blogName: "Build Log",
     title: "Planning a Feature Before Coding",
     body: "Breaking a feature into database, API, and interface tasks helps reveal dependencies before implementation begins.",
-    imgurl: "/src/assets/post-images/project-planning.png",
+    imgurl: "http://localhost:8000/uploads/post-images/project-planning.png",
     tags: ["Planning", "Productivity", "Full Stack"],
   },
   {
     blogName: "Build Log",
     title: "Connecting the Frontend to the Backend",
     body: "An overview of how browser requests move through routes and controllers before reaching PostgreSQL and returning JSON.",
-    imgurl: "/src/assets/post-images/web-architecture.png",
+    imgurl: "http://localhost:8000/uploads/post-images/web-architecture.png",
     tags: ["React", "Express", "PostgreSQL", "Full Stack"],
   },
 ];
@@ -86,6 +86,13 @@ try {
       );
 
       postId = postResult.rows[0].post_id;
+    } else {
+      await client.query(
+        `UPDATE posts
+         SET imgurl = $1
+         WHERE post_id = $2`,
+        [samplePost.imgurl, postId],
+      );
     }
 
     for (const tagTitle of samplePost.tags) {

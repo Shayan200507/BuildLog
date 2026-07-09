@@ -34,6 +34,7 @@ server.use(session({
 //Auth Route
 server.use("/api/auth",AuthHandler)
 server.use("/api/content",ContentHandler)
+server.use("/uploads", express.static("uploads"));
 
 
 //error handling
