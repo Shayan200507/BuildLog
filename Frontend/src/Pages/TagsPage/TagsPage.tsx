@@ -33,6 +33,10 @@ export function TagsPage(){
 
 
     async function addSelection(element: tagElement){
+
+
+        const bodyList = [...(selectedTagsList ?? []),element]
+
         setSelectedTagsList((selectedTagsList) => [...(selectedTagsList ?? []),element])
         setTagsList((tagsList) => {
             const outList:tagElement[] = []
@@ -53,7 +57,7 @@ export function TagsPage(){
          headers: {
     "Content-Type": "application/json",
      },
-     body: JSON.stringify(selectedTagsList ?? [])
+     body: JSON.stringify(bodyList ?? [])
 
 
 
@@ -81,6 +85,8 @@ export function TagsPage(){
 
     async function removeSelection(element: tagElement) {
 
+          const bodyList = selectedTagsList?.filter((e)=>{return element.tag_id !== e.tag_id})
+
         setTagsList((TagsList) =>[...(TagsList ?? []),element])
 
         setSelectedTagsList((selectedtagsList) => {
@@ -103,7 +109,7 @@ export function TagsPage(){
          headers: {
     "Content-Type": "application/json",
      },
-     body: JSON.stringify(selectedTagsList ?? [])
+     body: JSON.stringify(bodyList ?? [])
 
 
 
@@ -200,7 +206,6 @@ fetch("http://localhost:8000/api/content/getTags", {
     <NavBar  userInfo={userDetails} page="Tags"/>
    
    <div className="tagsPageListContainer">
-
     <div className="TagTableHeadingContainer"><h1>Available Tags</h1></div>
     <ul className="tagsPageList">{renderTagList}</ul>
     </div>  

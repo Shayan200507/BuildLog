@@ -3,9 +3,23 @@ import { NavBar } from "../Universal_Containers/NavBar"
 import type { responseType } from "../Universal_Types/responseType"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
+
+const uploadIcon = "/upload-icons/image-upload.svg"
+
+
 type tagElement = {
     tag_id: number
     tag_title: string
+}
+
+type createPostInputs = {
+  title: string
+  body: string
+  image: File | null
+  tags: tagElement[]
+}
+type errType = {
+  message:string
 }
 
 
@@ -14,8 +28,110 @@ export function CreatePost() {
   const [userDetails, setUserDetails] = useState<responseType>()
  const [tagsList,setTagsList] = useState<tagElement[]>()
   const [selectedTagsList,setSelectedTagsList] = useState<tagElement[]>() 
+  const[imgElement,setImgElement]= useState<string>()
+  const [error,setError]= useState<string>("")
+
+
+
   
   
+  function HandleUpload(Event:  React.ChangeEvent<HTMLInputElement>){
+           
+    const uploadImg:File|undefined =  Event.target.files?.[0] 
+
+      if(uploadImg){
+          const  objectURL = URL.createObjectURL(uploadImg as File);
+          setImgElement(objectURL)
+      }
+  
+  
+  
+  }
+  
+  
+  
+  function FormSubmit(data: FormData){
+    const uploadedImage = data.get("image")
+   
+
+
+  try {
+    if(uploadedImage){
+      const fileUpload:File = uploadedImage as File
+      if(!fileUpload.type.startsWith("image/")){ throw {message: "Incorrect file type"}}
+      else{
+        const imgUrl = URL.createObjectURL(fileUpload)
+        const image = new Image()
+
+        image.onload= ()=>{
+          if(image.height > 2048 || image.width >2048){URL.revokeObjectURL(imgUrl); throw {message: "Maximum resolution is 2048 x 2048"}}
+          URL.revokeObjectURL(imgUrl);
+          return
+        }
+        image.onerror = ()=>{ URL.revokeObjectURL(imgUrl);throw {message: "Cannot Upload your Image"}}
+
+        image.src = imgUrl;
+      
+      
+      }
+    }
+  }
+  catch(error){
+    console.log(error)
+    if(typeof error === "object" && error != null &&  "message" in error ){
+      setError(error.message as string)
+
+    }
+
+  }
+
+    const inputs: createPostInputs = {
+      title: String(data.get("Title") ?? ""),
+      body: String(data.get("Body") ?? ""),
+      image: uploadedImage ? uploadedImage as File : null   ,
+      tags: selectedTagsList ?? [],
+    }
+
+    console.log(inputs)
+  }
+  
+  
+  
+  
+  
+  
+  function addSelection(element:tagElement){
+            setSelectedTagsList((selectedTagsList) => [...(selectedTagsList ?? []),element])
+        setTagsList((tagsList) => {
+            const outList:tagElement[] = []
+        for(const e  of tagsList ?? []){
+             
+            if(!(e.tag_title === element.tag_title)){outList.push(e)}
+            
+
+        }
+        return outList
+       
+    })
+  }
+
+
+function removeSelection(element: tagElement){
+        setTagsList((TagsList) =>[...(TagsList ?? []),element])
+
+        setSelectedTagsList((selectedtagsList) => {
+            const outList:tagElement[] = []
+        for(const e  of selectedtagsList?? []){
+             
+            if(!(e.tag_title === element.tag_title)){outList.push(e)}
+            
+
+        }
+        return outList
+       
+    })
+}
+
   
   useEffect(() => {
     fetch("http://localhost:8000/api/auth/me", {
@@ -74,7 +190,7 @@ fetch("http://localhost:8000/api/content/getTags", {
  const renderTagList = tagsList?.map((Element:tagElement) =>{
 
 
-       return <li key={Element.tag_id} className="tagsListElement"><button  onClick={()=>addSelection(Element)}>{Element.tag_title}</button></li>
+       return <li key={Element.tag_id} className="tagsListElement"><button type="button" onClick={()=>addSelection(Element)}>{Element.tag_title}</button></li>
 
     })
 
@@ -82,7 +198,7 @@ fetch("http://localhost:8000/api/content/getTags", {
     const renderSelectedTagList = selectedTagsList?.map((Element:tagElement) =>{
 
 
-       return <li key={Element.tag_id} className="tagsListElement"><button  onClick={()=>removeSelection(Element)}>{Element.tag_title}</button></li>})
+       return <li key={Element.tag_id} className="tagsListElement"><button type="button" onClick={()=>removeSelection(Element)}>{Element.tag_title}</button></li>})
 
 
 
@@ -110,9 +226,9 @@ fetch("http://localhost:8000/api/content/getTags", {
   
   
   <div className="formContainer">
-    <h1>{}</h1>
+    <h1>{error}</h1>
     <h1>Create Your Post!</h1>
-<form >
+<form action={FormSubmit}>
 
      <div className="tagsPageListContainer">
     <div className="TagTableHeadingContainer"><h1>Available Tags</h1></div>
@@ -122,7 +238,7 @@ fetch("http://localhost:8000/api/content/getTags", {
    
 
 <label htmlFor="Title" >Title:</label>
-<input type="text" placeholder="Title" name="name" required></input> 
+<input type="text" placeholder="Title" name="Title" required></input> 
 
 
 <label htmlFor="Body">Body:</label>
@@ -133,6 +249,25 @@ fetch("http://localhost:8000/api/content/getTags", {
     <div className="TagTableHeadingContainer"><h1>Selected Tags</h1></div>
     <ul className="tagsPageList">{renderSelectedTagList}</ul>
     </div>  
+
+    <div className="FileContainer">
+    <label htmlFor="image" className="uploadImageLabel">
+   
+    <img  className={!imgElement ? "uploading" : "uploadedImg" }  src={imgElement ?? uploadIcon}/>
+    {imgElement && <div className="removeImgContainer"><button type="button" onClick={()=>setImgElement(undefined)}  className="removeImg">Delete</button></div>}
+    </label>
+   
+
+  <input
+    id="image"
+    accept="image/*"
+    name="image"
+    type="file"
+    className="imgUploader"
+    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>HandleUpload(event)}
+  />
+
+    </div>
 
 
 <button type="submit">Create Blog</button>

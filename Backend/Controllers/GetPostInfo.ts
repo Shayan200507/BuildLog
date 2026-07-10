@@ -13,7 +13,7 @@ export async function getPostInfo(req: Request, res :Response){
 
         const postData = await pool.query(`
             
-            SELECT posts.title, posts.body, posts.imgurl, users.username, users.email, users.first_name,  users.last_name, blogs.name,  
+            SELECT blogs.blog_id,posts.title, posts.body, posts.imgurl, users.username, users.email, users.first_name,  users.last_name, blogs.name,  
             COALESCE(
              array_agg(tags.tag_title) FILTER (WHERE tags.tag_title is NOT NULL),'{}' 
             ) AS tags
@@ -32,6 +32,7 @@ export async function getPostInfo(req: Request, res :Response){
              WHERE posts.post_id = $1
 
             GROUP BY
+            blogs.blog_id,
             posts.title, posts.body, 
             posts.imgurl, 
             users.username, 

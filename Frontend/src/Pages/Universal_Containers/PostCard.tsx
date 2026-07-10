@@ -4,7 +4,8 @@ import heartOutline from "../../assets/like-icons/heart-outline.svg";
 import heartFilled from "../../assets/like-icons/heart-filled.svg";
 import "./PostCard.css";
 
-export type PostCardData = {
+export  type PostCardData = {
+  blog_id: number;
   post_id: number;
   title: string;
   imgurl: string | null;
@@ -63,7 +64,7 @@ export function PostCard({ post }: { post: PostCardData }) {
       <button
         type="button"
         className="navigateBtn"
-        onClick={() => navigate(`/readPost/${post.post_id}`)}
+        onClick={() => navigate(`/readPost/${post.blog_id}/${post.post_id}`)}
       >
         <img src={post.imgurl ?? ""} alt={post.title} />
         <div className="elementDetails">

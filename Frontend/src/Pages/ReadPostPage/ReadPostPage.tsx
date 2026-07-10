@@ -7,12 +7,12 @@ import heartOutline from "../../assets/like-icons/heart-outline.svg"
 import heartFilled from "../../assets/like-icons/heart-filled.svg"
 
 
-type likeResponse = {
+type LikeResponse = {
   like_count: number
   likedByUser?: boolean
 }
 
-type ReadPostResponse = {
+type ReadPostInfoResponse = {
   title: string
   body: string
   imgurl: string | null
@@ -28,7 +28,7 @@ export function ReadPostPage() {
   const navigate = useNavigate()
   const { post_id } = useParams()
   const [userDetails, setUserDetails] = useState<responseType>()
-  const [postData, setPostData] = useState<ReadPostResponse>()
+  const [postData, setPostData] = useState<ReadPostInfoResponse>()
   const [likeStatus,setLikeStatus] = useState<string>(heartOutline)
   const[likeCount,setLikeCount] = useState<number>(0)
 
@@ -105,7 +105,7 @@ useEffect(()=>{
             if(res.ok){ return res.json()}
               throw new Error("internal error")
 
-            }).then((data: ReadPostResponse)=>{setPostData(data)})
+            }).then((data: ReadPostInfoResponse)=>{setPostData(data)})
 
 },[])
 
@@ -123,7 +123,7 @@ fetch(`http://localhost:8000/api/content/postsLikeInfo/${post_id}`, {
   throw new Error("internal error")
 
 
-}).then((data:likeResponse) =>{setLikeStatus(data.likedByUser ? heartFilled : heartOutline);setLikeCount(data.like_count)})
+}).then((data:LikeResponse) =>{setLikeStatus(data.likedByUser ? heartFilled : heartOutline);setLikeCount(data.like_count)})
 
 
 

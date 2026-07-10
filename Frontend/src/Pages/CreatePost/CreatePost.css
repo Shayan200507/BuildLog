@@ -17,3 +17,57 @@
   flex-direction: column;
   align-items: center;
 }
+
+
+.FileContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.FileContainer {
+
+   width: 200px;
+   height: 200px;
+   border-radius: 5px;
+   
+      background: rgba(20, 18, 60, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border: none;
+   
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadedImg{
+  width: 150px;
+  height: 150px;
+  object-fit: contain; 
+}
+
+.imgUploader {
+  display: none;
+}
+
+.removeImgContainer{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.removeImgContainer > button{
+  background: none;
+  border: none;
+  color: white;
+}
+
+
+
+
+
