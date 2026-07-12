@@ -2,7 +2,6 @@ import home from "../../assets/icons/home.svg"
 import liked from "../../assets/icons/liked.svg"
 import blogs from "../../assets/icons/posts.svg"
 import tags from "../../assets/icons/tags.svg"
-import profile from "../../assets/icons/profile.svg"
 import "./BTNContainer.css"
 import { useNavigate } from "react-router"
 
@@ -19,7 +18,6 @@ export  function BTNContainer({page, loggedin}: {page:string, loggedin:boolean})
     { icon: liked, label: "Liked" },
     { icon: blogs, label: "Blogs" },
     { icon: tags, label: "Tags" },
-    { icon: profile, label: "Profile" },
   ];
   
   

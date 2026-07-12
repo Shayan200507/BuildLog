@@ -10,7 +10,6 @@ export async function getPosts(req:Request, res:Response){
    
    
     const blogid:number = Number(blogdata.blog_id)
-    console.log(blogid)
     if(Number.isNaN(blogid)){
         throw "Blog id is invalid"
     }
@@ -49,14 +48,12 @@ export async function getPosts(req:Request, res:Response){
         `,[blogid])
 
 
-        console.log("the data"+data.rows)
-
         res.json(data.rows)
 
 
     }
     catch(error){
-    console.log(error)
+    console.error(error)
     }
 
 

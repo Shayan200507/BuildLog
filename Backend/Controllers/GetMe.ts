@@ -3,8 +3,6 @@ import { pool} from "../Database/Connection.ts"
 import {json, type Request,type Response} from "express"
 
 export async  function getMe(req: Request, res:Response){
-    console.log("get me controller")
-  
    const uid:number = req.session.userID as number
 
 
@@ -20,7 +18,7 @@ export async  function getMe(req: Request, res:Response){
 
    }
    catch(error){
-    console.log(error)
+    console.error(error)
    }
    
 

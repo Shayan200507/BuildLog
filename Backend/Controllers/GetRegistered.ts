@@ -87,7 +87,7 @@ export async function getRegistered(req:Request,res:Response){
     }
     catch(error){
 
-         console.log(error)
+         console.error(error)
          res.status(400).json({message: `error:${error}`})
 
     }
@@ -143,10 +143,7 @@ export async function getRegistered(req:Request,res:Response){
         `,[userData.First_Name,userData.Last_Name,userData.email,userData.username,hashedPass,userData.dob])
 
 
-        //console.log("insertData:")
-        //console.log(insertData)
         req.session.userID = insertData.rows[0].id
-        //console.log(req.session.userID)
 
         
 

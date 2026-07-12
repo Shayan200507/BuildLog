@@ -14,7 +14,7 @@ type tagElement = {
 }
 
 type createPostInputs = {
-  blog_id: number
+  blog_id: string
   title: string
   body: string
   image?: string | null
@@ -33,8 +33,12 @@ const defaultImgUrl = `http://localhost:8000/uploads/post-images/default-post.pn
 const imgUrlPrefix = `http://localhost:8000/`
 
 export async function PostPost(req:Request, res:Response){
+    const dataBody:createPostInputs = {blog_id: req.body.blog_id,
+        title: req.body.Title, body: req.body.Body, tags: JSON.parse(req.body.tags)
 
-    const dataBody:createPostInputs = req.body
+    }
+    
+    
     const client = await pool.connect()
 
     try{
@@ -42,7 +46,7 @@ export async function PostPost(req:Request, res:Response){
         let inputData:databaseInput
         if(req.file){
             inputData = {
-                blog_id: dataBody.blog_id,
+                blog_id: Number(dataBody.blog_id),
                 title: dataBody.title,
                 body: dataBody.body,
                 imageUrl:imgUrlPrefix +req.file.path,
@@ -51,7 +55,7 @@ export async function PostPost(req:Request, res:Response){
         }
         else{
               inputData = {
-                blog_id: dataBody.blog_id,
+                blog_id: Number(dataBody.blog_id),
                 title: dataBody.title,
                 body: dataBody.body,
                 imageUrl:defaultImgUrl,
@@ -66,20 +70,34 @@ export async function PostPost(req:Request, res:Response){
         const returnData = await pool.query(`
             
             INSERT INTO posts(blog_id,title,body,imgurl)
-            SELECT $1,$2,$3,$4,tag_id FROM UNNEST($5::int[]) AS tag_id
+            SELECT $1,$2,$3,$4
 
             RETURNING posts.post_id
 
             
-            `,[inputData.blog_id,inputData.title,inputData.body,inputData.imageUrl,inputData.tags])
+            `,[inputData.blog_id,inputData.title,inputData.body,inputData.imageUrl])
 
 
-        await client.query("BEGIN")
+        const currentID:number = returnData.rows[0].post_id
+        
+        const tags_postsReturnData = await pool.query(`
+             
+            INSERT INTO tags_posts(post_id,tag_id)  SELECT
+            $1,tagID FROM UNNEST($2::int[]) as tagID
+            
+            
+            
+            `,[currentID,inputData.tags])
+
+
+        await client.query("COMMIT")
+
+        res.json({ post_id: currentID })
 
     }
     catch(error){
-          await client.query("BEGIN")
-        console.log(error)
+          await client.query("ROLLBACK")
+        console.error(error)
         res.status(500).json({message:"Internal Server error"})
     }
     finally{

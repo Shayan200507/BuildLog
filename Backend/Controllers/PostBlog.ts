@@ -13,8 +13,6 @@ type BodyType = {
 }
 
 export async  function PostBlog(req:Request ,res:Response){
-    console.log("creating blog")
-
     const uid = req.session.userID as number
     const userData: BodyType= req.body 
 
@@ -24,10 +22,6 @@ export async  function PostBlog(req:Request ,res:Response){
     for(const keys of akeys){
       userData[keys] = sanitizeHtml(userData[keys],{allowedTags: [], allowedAttributes: {}})
     }
-
-    console.log(userData.name,userData.description)
-
-
 
   try{
 
@@ -41,7 +35,7 @@ export async  function PostBlog(req:Request ,res:Response){
     res.status(201).json(writeDate.rows[0])
   }
   catch(error){
-    console.log(error)
+    console.error(error)
       res.status(500).json({ message: "Something went wrong creating the blog" })
     
   }

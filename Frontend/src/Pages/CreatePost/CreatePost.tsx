@@ -35,7 +35,7 @@ export function CreatePost() {
 
   
   
-  function HandleUpload(Event:  React.ChangeEvent<HTMLInputElement>){
+   function HandleUpload(Event:  React.ChangeEvent<HTMLInputElement>){
            
     const uploadImg:File|undefined =  Event.target.files?.[0] 
 
@@ -50,7 +50,7 @@ export function CreatePost() {
   
   
   
-  function FormSubmit(data: FormData){
+  async function FormSubmit(data: FormData){
     const uploadedImage = data.get("image")
    
 
@@ -86,14 +86,31 @@ export function CreatePost() {
   }
 
     const inputs: createPostInputs = {
-      blog_id: Number(blog_id as string),
+      blog_id: Number(String(blog_id) as string),
       title: String(data.get("Title") ?? ""),
       body: String(data.get("Body") ?? ""),
       image: uploadedImage ? uploadedImage as File : null   ,
       tags: selectedTagsList ?? [],
     }
+    data.append("blog_id",String(inputs.blog_id))
+    data.append("tags",JSON.stringify(selectedTagsList ?? []))
+    const res = await fetch("http://localhost:8000/api/content/createPost",{
+      credentials: "include",
+      method: "POST",
+      body: data
+    })
 
-    console.log(inputs)
+    if(res.ok){
+      const data = await res.json()
+      navigate(`/readPost/${inputs.blog_id}/${data.post_id}`)
+    }
+    else{
+      const data:{message:string} = await res.json()
+      setError(data.message)
+    }
+  
+  
+  
   }
   
   
