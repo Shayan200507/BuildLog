@@ -3,7 +3,7 @@ import { NavBar } from "../Universal_Containers/NavBar"
 import type { responseType } from "../Universal_Types/responseType"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-
+import { useParams } from "react-router"
 const uploadIcon = "/upload-icons/image-upload.svg"
 
 
@@ -13,14 +13,13 @@ type tagElement = {
 }
 
 type createPostInputs = {
+  blog_id: number
   title: string
   body: string
   image: File | null
   tags: tagElement[]
 }
-type errType = {
-  message:string
-}
+
 
 
 export function CreatePost() {
@@ -30,6 +29,7 @@ export function CreatePost() {
   const [selectedTagsList,setSelectedTagsList] = useState<tagElement[]>() 
   const[imgElement,setImgElement]= useState<string>()
   const [error,setError]= useState<string>("")
+  const {blog_id} = useParams()
 
 
 
@@ -86,6 +86,7 @@ export function CreatePost() {
   }
 
     const inputs: createPostInputs = {
+      blog_id: Number(blog_id as string),
       title: String(data.get("Title") ?? ""),
       body: String(data.get("Body") ?? ""),
       image: uploadedImage ? uploadedImage as File : null   ,
@@ -270,7 +271,7 @@ fetch("http://localhost:8000/api/content/getTags", {
     </div>
 
 
-<button type="submit">Create Blog</button>
+<button type="submit">Create Post</button>
 
 
 

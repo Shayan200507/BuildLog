@@ -10,6 +10,8 @@ import {changeLikeStatus} from "../Controllers/ChangeLikeStatus.ts"
 import {getLikedPosts} from "../Controllers/GetLikedPosts.ts"
 import {getTags} from "../Controllers/GetTags.ts"
 import {getFilteredPosts} from "../Controllers/GetFilteredPosts.ts"
+import {PostPost} from "../Controllers/PostPost.ts"
+import { upload } from "../Middleware/Multer.ts";
 
 
 export const ContentHandler = Express.Router()
@@ -18,6 +20,7 @@ export const ContentHandler = Express.Router()
 
 ContentHandler.get("/blogs",LoggedInCheck,getBlogs)
 ContentHandler.post("/postBlog",LoggedInCheck,PostBlog)
+ContentHandler.post("/postPost",LoggedInCheck,PostPost)
 ContentHandler.get("/posts/:blog_id",LoggedInCheck,getPosts)
 ContentHandler.get("/postsInfo/:post_id",LoggedInCheck,getPostInfo)
 ContentHandler.get("/latestPosts", getLatestPost)
@@ -26,3 +29,4 @@ ContentHandler.post("/updateLikeStatus/:post_id",LoggedInCheck,changeLikeStatus)
  ContentHandler.get("/getLikedPosts",LoggedInCheck,getLikedPosts)
  ContentHandler.get("/getTags",getTags)
  ContentHandler.post("/getFilteredPosts",getFilteredPosts)
+ContentHandler.post("/createPost",LoggedInCheck,upload.single("image"),PostPost)
